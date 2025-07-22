@@ -87,83 +87,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
     if (navbar) {
-        if (window.scrollY > 100) {
-            navbar.style.background = 'rgba(26, 26, 46, 0.98)';
+        if (window.scrollY > 80) { // Ajustado para corresponder ao padding do navbar
+            navbar.style.background = 'rgba(25, 28, 61, 0.98)'; // Fundo mais opaco ao scroll
         } else {
-            navbar.style.background = 'rgba(26, 26, 46, 0.95)';
+            navbar.style.background = 'rgba(25, 28, 61, 0.95)'; // Fundo original
         }
     }
-});
-
-// Add hover effect to service cards and highlight cards
-document.querySelectorAll('.service-card, .highlight-card, .portfolio-item, .cliente-logo').forEach(card => { // Adicionado .portfolio-item e .cliente-logo
-    card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-10px) scale(1.02)';
-    });
-    
-    card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
-    });
-});
-
-// Parallax effect for floating elements
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const parallaxElements = document.querySelectorAll('.floating-element'); // Renomeado para evitar conflito
-
-    parallaxElements.forEach(element => {
-        const speed = 0.3; // Ajustado para um efeito mais sutil
-        element.style.transform = `translateY(${scrolled * speed}px)`;
-    });
-});
-
-// Add loading animation
-window.addEventListener('load', () => {
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.5s ease';
-    setTimeout(() => {
-        document.body.style.opacity = '1';
-    }, 100);
-});
-
-// Counter animation for statistics (if needed in future)
-function animateCounter(element, target, duration = 2000) {
-    let start = 0;
-    const increment = target / (duration / 16);
-    
-    function updateCounter() {
-        start += increment;
-        if (start < target) {
-            element.textContent = Math.floor(start);
-            requestAnimationFrame(updateCounter);
-        } else {
-            element.textContent = target;
-        }
-    }
-    
-    updateCounter();
-}
-
-// Intersection Observer for animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            observer.unobserve(entry.target); // Deixa de observar depois de animar
-        }
-    });
-}, observerOptions);
-
-// Observe elements for scroll animations
-document.querySelectorAll('.highlight-card, .service-card, .portfolio-item, .cliente-logo, .contato-form, .contato-info, .section-title').forEach(element => { // Aplicado a mais elementos
-    element.style.opacity = '0';
-    element.style.transform = 'translateY(30px)';
-    element.style.transition = 'all 0.6s ease';
-    observer.observe(element);
 });
